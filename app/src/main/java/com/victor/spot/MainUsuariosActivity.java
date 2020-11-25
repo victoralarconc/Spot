@@ -82,22 +82,13 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaUsuario.clear();
-                for (DataSnapshot objSnaptshop: dataSnapshot.getChildren()){
-                    Usuario u= objSnaptshop.getValue(Usuario.class);
+                for (DataSnapshot objSnaptshop : dataSnapshot.getChildren()) {
+                    Usuario u = objSnaptshop.getValue(Usuario.class);
                     listaUsuario.add(u);
-                    arrayAdapterUsuarios=new ArrayAdapter<Usuario>(MainUsuariosActivity.this, android.R.layout.simple_list_item_1, listaUsuario);
+                    arrayAdapterUsuarios = new ArrayAdapter<Usuario>(MainUsuariosActivity.this, android.R.layout.simple_list_item_1, listaUsuario);
 
                     listaView_usuarios.setAdapter(arrayAdapterUsuarios);
                 }
-
-            }
-            case R.id.btnEditar: {
-                Usuario u =new Usuario();
-                u.setId(usuariosSelected.getId());
-                u.setNombre(nombre.getText().toString().trim());
-                u.setApellido(apellido.getText().toString().trim());
-                u.setCorreo(correo.getText().toString().trim());
-                u.setPassword(password.getText().toString().trim());
 
             }
 
@@ -176,7 +167,6 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
                 u.setApellido(apellido.getText().toString().trim());
                 u.setCorreo(correo.getText().toString().trim());
                 u.setPassword(password.getText().toString().trim());
-
             }
         }
     }
