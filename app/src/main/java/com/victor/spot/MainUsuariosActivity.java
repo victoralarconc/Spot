@@ -78,7 +78,7 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
         databaseReference.child("Usuario").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                listaUsuario.clear();
             }
 
             @Override
