@@ -133,7 +133,7 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
 
         switch (v.getId()){
             case R.id.btnGuardar:{
-                if(nombreP.equals("") || (apellidoP.equals("") || (correoP.equals("") || (passwordP.equals(""))))) {
+                if(nombreP.equals("") || apellidoP.equals("") || correoP.equals("") || passwordP.equals("")) {
                     validacion();
                 } else {
 
