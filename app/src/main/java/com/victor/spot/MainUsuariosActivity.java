@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -96,6 +97,18 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
         //xdxd
     }
     private void IniciarFirebase() {
+        FirebaseApp.initializeApp(this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+    }
+
+    private void limpiar() {
+
+        nombre.setText("");
+        apellido.setText("");
+        correo.setText("");
+        password.setText("");
+
     }
 
     @Override
