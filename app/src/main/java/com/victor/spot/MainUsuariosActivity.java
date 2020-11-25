@@ -93,7 +93,7 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
             }
             case R.id.btnEditar: {
                 Usuario u =new Usuario();
-                u.Uid(usuariosSelected.getUid());
+                u.setId(usuariosSelected.getId());
                 u.setNombre(nombre.getText().toString().trim());
                 u.setApellido(apellido.getText().toString().trim());
                 u.setCorreo(correo.getText().toString().trim());
