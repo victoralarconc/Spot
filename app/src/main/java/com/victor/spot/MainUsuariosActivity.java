@@ -79,6 +79,9 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaUsuario.clear();
+                for (DataSnapshot objSnaptshop: dataSnapshot.getChildren()){
+                    
+                }
             }
 
             @Override
