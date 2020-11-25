@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +24,7 @@ import com.victor.spot.Modelo.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class MainUsuariosActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -80,13 +82,14 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaUsuario.clear();
-                for (DataSnapshot objSnaptshop: dataSnapshot.getChildren()){
-                    Usuario u= objSnaptshop.getValue(Usuario.class);
+                for (DataSnapshot objSnaptshop : dataSnapshot.getChildren()) {
+                    Usuario u = objSnaptshop.getValue(Usuario.class);
                     listaUsuario.add(u);
-                    arrayAdapterUsuarios=new ArrayAdapter<Usuario>(MainUsuariosActivity.this, android.R.layout.simple_list_item_1, listaUsuario);
+                    arrayAdapterUsuarios = new ArrayAdapter<Usuario>(MainUsuariosActivity.this, android.R.layout.simple_list_item_1, listaUsuario);
 
                     listaView_usuarios.setAdapter(arrayAdapterUsuarios);
                 }
+
             }
 
             @Override
@@ -110,11 +113,61 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
         apellido.setText("");
         correo.setText("");
         password.setText("");
-//jelou
+
     }
 
-    @Override
-    public void onClick(View view) {
+    private void validacion(){
+        String nombreP = nombre.getText().toString();
+        String apellidoP = apellido.getText().toString();
+        String correoP = correo.getText().toString();
+        String passwordP = password.getText().toString();
 
+        if (nombreP.equals("")){
+            nombre.setError("Required");
+        }
+        else if(apellidoP.equals("")){
+            apellido.setError("Required");
+        }
+        else if(correoP.equals("")){
+            correo.setError("Required");
+        }
+        else if(passwordP.equals("")){
+            password.setError("Required");
+        }
+
+    }
+    @Override
+    public void onClick(View v) {
+        String nombreP= nombre.getText().toString();
+        String apellidoP=apellido.getText().toString();
+        String correoP=correo.getText().toString();
+        String passwordP=password.getText().toString();
+
+        switch (v.getId()){
+            case R.id.btnGuardar:{
+                if(nombreP.equals("") || apellidoP.equals("") || correoP.equals("") || passwordP.equals("")) {
+                    validacion();
+                } else {
+                    Usuario u = new Usuario();
+                    u.setId(UUID.randomUUID().toString());
+                    u.setNombre(nombreP);
+                    u.setApellido(apellidoP);
+                    u.setCorreo(correoP);
+                    u.setPassword(passwordP);
+                    databaseReference.child("Usuario").child(u.getId()).setValue(u);
+                    Toast.makeText(this, "Usuario Almacenado", Toast.LENGTH_SHORT).show();
+                    limpiar();
+                }
+                break;
+            }
+            case R.id.btnEditar: {
+                Usuario u =new Usuario();
+                u.setId(usuariosSelected.getId());
+                u.setNombre(nombre.getText().toString().trim());
+                u.setApellido(apellido.getText().toString().trim());
+                u.setCorreo(correo.getText().toString().trim());
+                u.setPassword(password.getText().toString().trim());
+            }
+        }
     }
 }
