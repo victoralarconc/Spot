@@ -110,9 +110,20 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
         apellido.setText("");
         correo.setText("");
         password.setText("");
-//jelou
+
     }
 
+    private void validacion(){
+        String nombreP = nombre.getText().toString();
+        String apellidoP = apellido.getText().toString();
+        String correoP = correo.getText().toString();
+        String passwordP = password.getText().toString();
+
+        if (nombreP.equals("")){
+            nombre.setError("Required");
+        }
+
+    }
     @Override
     public void onClick(View view) {
 

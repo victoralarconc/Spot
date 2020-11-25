@@ -1,0 +1,27 @@
+Index: app/src/main/java/com/victor/spot/MainUsuariosActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.victor.spot;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.icu.text.Transliterator;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.AdapterView;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ListView;\r\n\r\nimport com.google.firebase.FirebaseApp;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\nimport com.victor.spot.Modelo.Usuario;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class MainUsuariosActivity extends AppCompatActivity implements View.OnClickListener{\r\n\r\n    private List<Usuario> listaUsuario = new ArrayList<>();\r\n    ArrayAdapter<Usuario> arrayAdapterUsuarios;\r\n\r\n    EditText nombre, apellido, correo, password;\r\n    ListView listaView_usuarios;\r\n\r\n    FirebaseDatabase firebaseDatabase;\r\n    DatabaseReference databaseReference;\r\n\r\n    Usuario usuariosSelected;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main_usuarios);\r\n\r\n        nombre= findViewById(R.id.txtNombre);\r\n        apellido=findViewById(R.id.txtApellido);\r\n        correo=findViewById(R.id.txtCorreo);\r\n        password=findViewById(R.id.txtPassword);\r\n\r\n        listaView_usuarios=findViewById(R.id.lv_datosUsuarios);\r\n\r\n        IniciarFirebase();\r\n        ListarDatos();\r\n\r\n\r\n        //Acciones de los botones.\r\n        Button bEditar= (Button) findViewById(R.id.btnEditar);\r\n        bEditar.setOnClickListener(this);\r\n\r\n        Button bEliminar= (Button) findViewById(R.id.btnEliminar);\r\n        bEliminar.setOnClickListener(this);\r\n\r\n        Button bGuardar= (Button) findViewById(R.id.btnGuardar);\r\n        bGuardar.setOnClickListener(this);\r\n\r\n        listaView_usuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {\r\n            @Override\r\n            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {\r\n                usuariosSelected = (Usuario)parent.getItemAtPosition(position);\r\n                nombre.setText(usuariosSelected.getNombre());\r\n                apellido.setText(usuariosSelected.getApellido());\r\n                correo.setText(usuariosSelected.getCorreo());\r\n                password.setText(usuariosSelected.getPassword());\r\n            }\r\n        });\r\n    }\r\n    private void ListarDatos(){\r\n\r\n        databaseReference.child(\"Usuario\").addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\r\n                listaUsuario.clear();\r\n                for (DataSnapshot objSnaptshop: dataSnapshot.getChildren()){\r\n                    Usuario u= objSnaptshop.getValue(Usuario.class);\r\n                    listaUsuario.add(u);\r\n                    arrayAdapterUsuarios=new ArrayAdapter<Usuario>(MainUsuariosActivity.this, android.R.layout.simple_list_item_1, listaUsuario);\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n            }\r\n        });\r\n\r\n        //comentario\r\n        //xdxd\r\n    }\r\n    private void IniciarFirebase() {\r\n        FirebaseApp.initializeApp(this);\r\n        firebaseDatabase = FirebaseDatabase.getInstance();\r\n        databaseReference = firebaseDatabase.getReference();\r\n    }\r\n\r\n    private void limpiar() {\r\n\r\n        nombre.setText(\"\");\r\n        apellido.setText(\"\");\r\n        correo.setText(\"\");\r\n        password.setText(\"\");\r\n//jelou\r\n    }\r\n\r\n    @Override\r\n    public void onClick(View view) {\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/victor/spot/MainUsuariosActivity.java	(revision 98c872324b12ff23d99a86c7647dbb6d227ad7a0)
++++ app/src/main/java/com/victor/spot/MainUsuariosActivity.java	(date 1606330584390)
+@@ -108,9 +108,16 @@
+         apellido.setText("");
+         correo.setText("");
+         password.setText("");
+-//jelou
++
+     }
+ 
++    private void validacion(){
++        String nombreP = nombre.getText().toString();
++        String correoP = nombre.getText().toString();
++        String nombreP = nombre.getText().toString();
++        String nombreP = nombre.getText().toString();
++
++    }
+     @Override
+     public void onClick(View view) {
+ 
