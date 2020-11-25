@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "749295975461",
+    "firebase_url": "https://spot-a1306.firebaseio.com",
+    "project_id": "spot-a1306",
+    "storage_bucket": "spot-a1306.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749295975461:android:65a5b54d9111ae62b8d3cc",
+        "android_client_info": {
+          "package_name": "com.victor.spot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749295975461-0m2p5tnefbi9om2fg01omkals5ueb4pf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.victor.spot",
+            "certificate_hash": "1749cedc0d1859f0c8ab2e0552738df13eed2a17"
+          }
+        },
+        {
+          "client_id": "749295975461-jbm0imv2s21tve2mp3794e1fo03rvbnl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkkjrFEa48FWrlDN5_w6_65aCDn9urlYo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749295975461-jbm0imv2s21tve2mp3794e1fo03rvbnl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
