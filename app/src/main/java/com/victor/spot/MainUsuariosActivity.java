@@ -102,6 +102,15 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
         databaseReference = firebaseDatabase.getReference();
     }
 
+    private void limpiar() {
+
+        nombre.setText("");
+        apellido.setText("");
+        correo.setText("");
+        password.setText("");
+
+    }
+
     @Override
     public void onClick(View view) {
 
