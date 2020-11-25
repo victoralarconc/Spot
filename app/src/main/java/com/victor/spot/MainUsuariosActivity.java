@@ -125,7 +125,21 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
 
     }
     @Override
-    public void onClick(View view) {
+    public void onClick(View v) {
+        String nombreP= nombre.getText().toString();
+        String apellidoP=apellido.getText().toString();
+        String correoP=correo.getText().toString();
+        String passwordP=password.getText().toString();
 
+        switch (v.getId()){
+            case R.id.btnGuardar:{
+                if(nombreP.equals("") || (apellidoP.equals("") || (correoP.equals("") || (passwordP.equals("")) {
+                    validacion();
+                } else {
+
+
+                }
+            }
+        }
     }
 }
