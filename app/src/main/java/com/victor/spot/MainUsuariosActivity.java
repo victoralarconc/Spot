@@ -122,6 +122,15 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
         if (nombreP.equals("")){
             nombre.setError("Required");
         }
+        else if(apellidoP.equals("")){
+            apellido.setError("Required");
+        }
+        else if(correoP.equals("")){
+            correo.setError("Required");
+        }
+        else if(passwordP.equals("")){
+            password.setError("Required");
+        }
 
     }
     @Override
