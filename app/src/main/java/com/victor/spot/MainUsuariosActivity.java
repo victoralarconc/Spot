@@ -168,6 +168,18 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
                 u.setCorreo(correo.getText().toString().trim());
                 u.setPassword(password.getText().toString().trim());
             }
+
+            case R.id.btnEliminar: {
+
+                Usuario u = new Usuario();
+                u.setId(usuariosSelected.getId());
+                databaseReference.child("Usuario").child(u.getId()).removeValue();
+                Toast.makeText(this, "Usuario Eliminado", Toast.LENGTH_SHORT).show();
+                limpiar();
+                break;
+
+            }
+
         }
     }
 }
