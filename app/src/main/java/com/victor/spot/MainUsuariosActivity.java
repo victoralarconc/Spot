@@ -81,6 +81,7 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
                 listaUsuario.clear();
                 for (DataSnapshot objSnaptshop: dataSnapshot.getChildren()){
                     //holo
+                    //nani!
                 }
             }
 
