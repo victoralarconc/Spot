@@ -89,6 +89,16 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
 
                     listaView_usuarios.setAdapter(arrayAdapterUsuarios);
                 }
+
+            }
+            case R.id.btnEditar: {
+                Usuario u =new Usuario();
+                u.Uid(usuariosSelected.getUid());
+                u.setNombre(nombre.getText().toString().trim());
+                u.setApellido(apellido.getText().toString().trim());
+                u.setCorreo(correo.getText().toString().trim());
+                u.setPassword(password.getText().toString().trim());
+
             }
 
             @Override
@@ -159,7 +169,15 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
                 }
                 break;
             }
-            case 
+            case R.id.btnEditar: {
+                Usuario u =new Usuario();
+                u.setId(usuariosSelected.getId());
+                u.setNombre(nombre.getText().toString().trim());
+                u.setApellido(apellido.getText().toString().trim());
+                u.setCorreo(correo.getText().toString().trim());
+                u.setPassword(password.getText().toString().trim());
+
+            }
         }
     }
 }
