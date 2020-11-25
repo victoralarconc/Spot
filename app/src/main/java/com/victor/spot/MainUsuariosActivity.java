@@ -80,7 +80,9 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaUsuario.clear();
                 for (DataSnapshot objSnaptshop: dataSnapshot.getChildren()){
-
+                    Usuario u= objSnaptshop.getValue(Usuario.class);
+                    listaUsuario.add(u);
+                    arrayAdapterUsuarios=new ArrayAdapter<Usuario>(MainUsuariosActivity.this, android.R.layout.simple_list_item_1, listaUsuario);
                 }
             }
 
