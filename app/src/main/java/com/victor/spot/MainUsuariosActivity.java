@@ -84,6 +84,8 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
                     Usuario u= objSnaptshop.getValue(Usuario.class);
                     listaUsuario.add(u);
                     arrayAdapterUsuarios=new ArrayAdapter<Usuario>(MainUsuariosActivity.this, android.R.layout.simple_list_item_1, listaUsuario);
+
+                    listaView_usuarios.setAdapter(arrayAdapterUsuarios);
                 }
             }
 
