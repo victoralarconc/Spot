@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +24,7 @@ import com.victor.spot.Modelo.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class MainUsuariosActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -145,10 +147,19 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
                 if(nombreP.equals("") || apellidoP.equals("") || correoP.equals("") || passwordP.equals("")) {
                     validacion();
                 } else {
-
-
+                    Usuario u = new Usuario();
+                    u.setId(UUID.randomUUID().toString());
+                    u.setNombre(nombreP);
+                    u.setApellido(apellidoP);
+                    u.setCorreo(correoP);
+                    u.setPassword(passwordP);
+                    databaseReference.child("Usuario").child(u.getId()).setValue(u);
+                    Toast.makeText(this, "Usuario Almacenado", Toast.LENGTH_SHORT).show();
+                    limpiar();
                 }
+                break;
             }
+            case 
         }
     }
 }
