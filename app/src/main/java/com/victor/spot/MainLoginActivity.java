@@ -60,7 +60,7 @@ FirebaseAuth firebaseAuth;
                                 if (!task.isSuccessful()){
                                     Toast.makeText(MainLoginActivity.this, "Usuario o contraseña no son validas", Toast.LENGTH_SHORT).show();
                                 }else {
-                                    Intent intent = new Intent (MainLoginActivity.this, MainHomeActivity.class);
+                                    Intent intent = new Intent (MainLoginActivity.this, MainUsuariosActivity.class);
                                     startActivity(intent);
                                 }
                             }
