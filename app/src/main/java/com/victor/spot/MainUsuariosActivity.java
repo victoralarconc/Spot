@@ -167,6 +167,10 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
                 u.setApellido(apellido.getText().toString().trim());
                 u.setCorreo(correo.getText().toString().trim());
                 u.setPassword(password.getText().toString().trim());
+                databaseReference.child("Usuario").child(u.getId()).setValue(u);
+                Toast.makeText(this, "Actualizado",Toast.LENGTH_LONG).show();
+                limpiar();
+                break;
             }
                 //jelouuuuuuuuuu
             case R.id.btnEliminar: {
@@ -174,7 +178,7 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
                 Usuario u = new Usuario();
                 u.setId(usuariosSelected.getId());
                 databaseReference.child("Usuario").child(u.getId()).removeValue();
-                Toast.makeText(this, "Usuario Eliminado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Usuario Eliminado", Toast.LENGTH_LONG).show();
                 limpiar();
                 break;
 
