@@ -168,7 +168,7 @@ public class MainUsuariosActivity extends AppCompatActivity implements View.OnCl
                 u.setCorreo(correo.getText().toString().trim());
                 u.setPassword(password.getText().toString().trim());
             }
-
+                //boton eliminar
             case R.id.btnEliminar: {
 
                 Usuario u = new Usuario();
