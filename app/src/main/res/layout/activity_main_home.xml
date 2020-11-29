@@ -1,18 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainHomeActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainHomeActivity"
+    android:background="@drawable/mapa">
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:src="@drawable/like"/>
+<ImageView
+    android:id="@+id/mapa"
+    android:layout_width="match_parent"
+    android:layout_height="176dp"
+    android:src="@drawable/avatar"/>
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:id="@+id/TextNickName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="149dp"
+        android:text="SPOT"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
-</LinearLayout>
+    <com.google.android.material.circularreveal.CircularRevealGridLayout
+        android:id="@+id/idgrind"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="200dp"
+        android:padding="4dp"
+        app:columnCount="2"
+        app:rowCount="3">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardMapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            android:foreground="?selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/mapaicon"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Mapa"
+                    android:textAlignment="center"
+                    android:textColor="#525458"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+
+                    />
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!--CARDVIEW COORDENADAS-->
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardCor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            android:foreground="?selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/coordenadasicon"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Coordenadas"
+                    android:textAlignment="center"
+                    android:textColor="#525458"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+
+                    />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.circularreveal.CircularRevealGridLayout>
+
+
+    <!--OTRO GRIND ABAJO-->
+
+
+    <com.google.android.material.circularreveal.CircularRevealGridLayout
+        android:id="@+id/idgrind2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="400dp"
+        android:padding="4dp"
+        app:columnCount="2"
+        app:rowCount="3">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            android:foreground="?selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/loginicon"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Login"
+                    android:textAlignment="center"
+                    android:textColor="#525458"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+
+                    />
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!--CARDVIEW COORDENADAS-->
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardAcercaDe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            android:foreground="?selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/informacionicon"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Acerca"
+                    android:textAlignment="center"
+                    android:textColor="#525458"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+
+                    />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.circularreveal.CircularRevealGridLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>
