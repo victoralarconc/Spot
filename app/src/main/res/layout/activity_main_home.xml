@@ -18,9 +18,10 @@
         android:id="@+id/TextNickName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="149dp"
+        android:layout_marginTop="160dp"
         android:text="SPOT"
         android:textAlignment="center"
+        android:textColor="#ffff"
         android:textSize="25sp"
         android:textStyle="bold" />
 
