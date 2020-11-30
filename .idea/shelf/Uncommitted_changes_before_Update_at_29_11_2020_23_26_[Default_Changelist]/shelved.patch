@@ -1,0 +1,36 @@
+Index: app/src/main/java/com/victor/spot/MapsActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.victor.spot;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.fragment.app.FragmentActivity;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport com.google.android.gms.maps.CameraUpdate;\r\nimport com.google.android.gms.maps.CameraUpdateFactory;\r\nimport com.google.android.gms.maps.GoogleMap;\r\nimport com.google.android.gms.maps.OnMapReadyCallback;\r\nimport com.google.android.gms.maps.SupportMapFragment;\r\nimport com.google.android.gms.maps.model.BitmapDescriptorFactory;\r\nimport com.google.android.gms.maps.model.LatLng;\r\nimport com.google.android.gms.maps.model.Marker;\r\nimport com.google.android.gms.maps.model.MarkerOptions;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class MapsActivity extends FragmentActivity implements OnMapReadyCallback {\r\n\r\n    private GoogleMap mMap;\r\n\r\n\r\n\r\n    private DatabaseReference databaseReference;\r\n\r\n\r\n    private ArrayList<Marker> tmpRealTimeMarkers = new ArrayList<>();\r\n\r\n    private ArrayList<Marker> realTimeMarkers = new ArrayList<>();\r\n\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_maps);\r\n        // Obtain the SupportMapFragment and get notified when the map is ready to be used.\r\n        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()\r\n                .findFragmentById(R.id.map);\r\n        mapFragment.getMapAsync(this);\r\n\r\n        databaseReference = FirebaseDatabase.getInstance().getReference();\r\n\r\n    }\r\n\r\n    /**\r\n     * Manipulates the map once available.\r\n     * This callback is triggered when the map is ready to be used.\r\n     * This is where we can add markers or lines, add listeners or move the camera. In this case,\r\n     * we just add a marker near Sydney, Australia.\r\n     * If Google Play services is not installed on the device, the user will be prompted to install\r\n     * it inside the SupportMapFragment. This method will only be triggered once the user has\r\n     * installed Google Play services and returned to the app.\r\n     */\r\n    @Override\r\n    public void onMapReady(GoogleMap googleMap) {\r\n        mMap = googleMap;\r\n        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);\r\n\r\n        mMap.animateCamera(CameraUpdateFactory.zoomTo( 17.0f));\r\n\r\n        databaseReference.child(\"coordenadas\").addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\r\n                for (Marker marker:realTimeMarkers){\r\n                    marker.remove();\r\n                }\r\n\r\n                for (DataSnapshot snapshot: dataSnapshot.getChildren()){\r\n                    Marcadores mk = snapshot.getValue(Marcadores.class);\r\n\r\n                    Double latitud = mk.getLatitud();\r\n                    Double longitud = mk.getLongitud();\r\n\r\n                    MarkerOptions markerOptions = new MarkerOptions();\r\n                    markerOptions.position(new LatLng(latitud,longitud));\r\n                    tmpRealTimeMarkers.add(mMap.addMarker(markerOptions));\r\n                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));\r\n                    LatLng coordinate = new LatLng(latitud,longitud);\r\n                    CameraUpdate location = CameraUpdateFactory.newLatLngZoom(coordinate, 150);\r\n                    mMap.animateCamera(location);\r\n\r\n                }\r\n                realTimeMarkers.clear();\r\n                realTimeMarkers.addAll(tmpRealTimeMarkers);\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n            }\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/victor/spot/MapsActivity.java	(revision 6a04ed52b11b768ea0637792b91eb607a65c530b)
++++ app/src/main/java/com/victor/spot/MapsActivity.java	(date 1606697596108)
+@@ -22,6 +22,8 @@
+ 
+ import java.util.ArrayList;
+ 
++import java.util.ArrayList;
++
+ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+ 
+     private GoogleMap mMap;
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_7\" default=\"true\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision 6a04ed52b11b768ea0637792b91eb607a65c530b)
++++ .idea/misc.xml	(date 1606697596114)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+diff --git .idea/shelf/Uncommitted_changes_before_Update_at_29_11_2020_20_45__Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Update_at_29_11_2020_20_45__Default_Changelist_.xml
