@@ -21,6 +21,7 @@ public class MainLoginActivity extends AppCompatActivity {
     private CardView login;
     private CardView register;
 
+
 FirebaseAuth firebaseAuth;
 
 
@@ -36,6 +37,7 @@ FirebaseAuth firebaseAuth;
         password=(EditText) findViewById(R.id.password);
         login= (CardView) findViewById(R.id.login);
         register=(CardView) findViewById(R.id.register);
+
 
         //Acciones de botones
         login.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +80,6 @@ FirebaseAuth firebaseAuth;
                 startActivity(intent);
             }
         });
-
 
 
 
