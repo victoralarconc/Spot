@@ -26,6 +26,16 @@ public class MainHomeActivity extends AppCompatActivity {
             }
         });
 
+
+        CardView btn3 = (CardView) findViewById(R.id.cardCor);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent (v.getContext(), MainIngresarGeoActivity.class);
+                startActivityForResult(intent2, 0);
+            }
+        });
+
     }
 
 }
