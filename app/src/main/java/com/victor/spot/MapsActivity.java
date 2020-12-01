@@ -86,7 +86,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     tmpRealTimeMarkers.add(mMap.addMarker(markerOptions));
                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                     LatLng coordinate = new LatLng(latitud,longitud);
-                    CameraUpdate location = CameraUpdateFactory.newLatLngZoom(coordinate, 150);
+                    CameraUpdate location = CameraUpdateFactory.newLatLngZoom(coordinate, 15);
                     mMap.animateCamera(location);
 
                 }
