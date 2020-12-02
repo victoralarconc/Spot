@@ -24,8 +24,6 @@ public class MainLoginActivity extends AppCompatActivity {
 
 FirebaseAuth firebaseAuth;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,9 +78,6 @@ FirebaseAuth firebaseAuth;
                 startActivity(intent);
             }
         });
-
-
-
 
 
 
