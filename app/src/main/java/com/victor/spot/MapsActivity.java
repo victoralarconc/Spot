@@ -28,16 +28,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
 
-
-
     private DatabaseReference databaseReference;
-
 
     private ArrayList<Marker> tmpRealTimeMarkers = new ArrayList<>();
 
     private ArrayList<Marker> realTimeMarkers = new ArrayList<>();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

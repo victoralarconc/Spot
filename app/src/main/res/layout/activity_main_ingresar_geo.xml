@@ -8,7 +8,6 @@
     android:padding="25dp"
     tools:context=".MainIngresarGeoActivity">
 
-
     <EditText
         android:id="@+id/txtLatitud"
         android:layout_width="match_parent"

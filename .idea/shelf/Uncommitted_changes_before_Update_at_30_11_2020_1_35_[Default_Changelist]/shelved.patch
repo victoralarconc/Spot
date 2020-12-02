@@ -1,0 +1,176 @@
+Index: app/src/main/java/com/victor/spot/MainIngresarGeoActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.victor.spot;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ListView;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.firebase.FirebaseApp;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\nimport com.victor.spot.Modelo.Coordenada;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\npublic class MainIngresarGeoActivity extends AppCompatActivity implements View.OnClickListener {\r\n\r\n    private List<Coordenada> listaCoordenadas = new ArrayList<>();\r\n    ArrayAdapter<Coordenada> arrayAdapterCoordenadas;\r\n\r\n    EditText latitud, longitud;\r\n    ListView listaView_coordenadas;\r\n\r\n    FirebaseDatabase firebaseDatabase;\r\n    DatabaseReference databaseReference;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main_ingresar_geo);\r\n\r\n        latitud = findViewById(R.id.txtLatitud);\r\n        longitud = findViewById(R.id.txtLongitud);\r\n\r\n        listaView_coordenadas = findViewById(R.id.lv_datosCoordenadas);\r\n        iniciarFirebase();\r\n        listarDatos();\r\n\r\n        Button bGuardar = (Button) findViewById(R.id.btnGuardar);\r\n        bGuardar.setOnClickListener(this);\r\n\r\n    }\r\n\r\n    private void listarDatos() {\r\n\r\n        databaseReference.child(\"coordenadas\").addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\r\n                listaCoordenadas.clear();\r\n                for (DataSnapshot objSnaptshot : dataSnapshot.getChildren()) {\r\n\r\n                    Coordenada u = objSnaptshot.getValue(Coordenada.class);\r\n                    listaCoordenadas.add(u);\r\n                    arrayAdapterCoordenadas = new ArrayAdapter<Coordenada>(MainIngresarGeoActivity.this, android.R.layout.simple_list_item_1, listaCoordenadas);\r\n\r\n                    listaView_coordenadas.setAdapter(arrayAdapterCoordenadas);\r\n\r\n\r\n            }\r\n\r\n\r\n        }\r\n\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError databaseError) {\r\n\r\n\r\n            }\r\n\r\n        });\r\n\r\n    }\r\n\r\nprivate void iniciarFirebase(){\r\n    FirebaseApp.initializeApp(this);\r\n    firebaseDatabase = FirebaseDatabase.getInstance();\r\n    databaseReference = firebaseDatabase.getReference();\r\n}\r\n\r\nprivate void limpiar (){\r\n        latitud.setText(\"\");\r\n        longitud.setText(\"\");\r\n}\r\nprivate void validacion(){\r\n        Double latitudP = Double.parseDouble(latitud.getText().toString());\r\n    Double longitudP = Double.parseDouble(longitud.getText().toString());\r\n\r\n\r\n    if (latitudP.equals(\"\")){\r\n\r\n        latitud.setError(\"Required\");\r\n\r\n    }else if (longitudP.equals(\"\")){\r\n        longitud.setError(\"Required\");\r\n\r\n    }\r\n}\r\n@Override\r\n    public void onClick(View v){\r\n        Double latitudP = Double.parseDouble(latitud.getText().toString());\r\n    Double longitudP = Double.parseDouble(longitud.getText().toString());\r\n\r\n    switch(v.getId()){\r\n        case R.id.btnGuardar: {\r\n            if (latitudP.equals(\"\") || longitudP.equals(\"\")){\r\n                validacion();\r\n            }else{\r\n                Coordenada u = new Coordenada();\r\n                u.setLatitud(latitudP);\r\n                u.setLongitud(longitudP);\r\n                Map<String, Object> latlong = new HashMap<>();\r\n                latlong.put(\"latitud\", u.getLatitud());\r\n                latlong.put(\"longitud\", u.getLongitud());\r\n                databaseReference.child(\"coordenadas\").push().setValue(latlong);\r\n                Toast.makeText(this, \"Coordenadas Agregadas\", Toast.LENGTH_LONG).show();\r\n                limpiar();\r\n\r\n                }\r\n            break;\r\n        }\r\n    }\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/victor/spot/MainIngresarGeoActivity.java	(revision 3f7575e826df4572e19c0fe0d085ea7340ca02a8)
++++ app/src/main/java/com/victor/spot/MainIngresarGeoActivity.java	(date 1606709002727)
+@@ -26,7 +26,7 @@
+ 
+ public class MainIngresarGeoActivity extends AppCompatActivity implements View.OnClickListener {
+ 
+-    private List<Coordenada> listaCoordenadas = new ArrayList<>();
++    private List<Coordenada> listaCoordenadas = new ArrayList<>() ;
+     ArrayAdapter<Coordenada> arrayAdapterCoordenadas;
+ 
+     EditText latitud, longitud;
+@@ -59,28 +59,18 @@
+             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                 listaCoordenadas.clear();
+                 for (DataSnapshot objSnaptshot : dataSnapshot.getChildren()) {
+-
+                     Coordenada u = objSnaptshot.getValue(Coordenada.class);
+                     listaCoordenadas.add(u);
+                     arrayAdapterCoordenadas = new ArrayAdapter<Coordenada>(MainIngresarGeoActivity.this, android.R.layout.simple_list_item_1, listaCoordenadas);
+-
+                     listaView_coordenadas.setAdapter(arrayAdapterCoordenadas);
+-
+-
+             }
+-
+-
+         }
+-
+ 
+             @Override
+             public void onCancelled(@NonNull DatabaseError databaseError) {
+ 
+-
+             }
+-
+         });
+-
+     }
+ 
+ private void iniciarFirebase(){
+@@ -95,7 +85,7 @@
+ }
+ private void validacion(){
+         Double latitudP = Double.parseDouble(latitud.getText().toString());
+-    Double longitudP = Double.parseDouble(longitud.getText().toString());
++        Double longitudP = Double.parseDouble(longitud.getText().toString());
+ 
+ 
+     if (latitudP.equals("")){
+@@ -110,7 +100,7 @@
+ @Override
+     public void onClick(View v){
+         Double latitudP = Double.parseDouble(latitud.getText().toString());
+-    Double longitudP = Double.parseDouble(longitud.getText().toString());
++        Double longitudP = Double.parseDouble(longitud.getText().toString());
+ 
+     switch(v.getId()){
+         case R.id.btnGuardar: {
+@@ -120,12 +110,12 @@
+                 Coordenada u = new Coordenada();
+                 u.setLatitud(latitudP);
+                 u.setLongitud(longitudP);
+-                Map<String, Object> latlong = new HashMap<>();
+-                latlong.put("latitud", u.getLatitud());
+-                latlong.put("longitud", u.getLongitud());
+-                databaseReference.child("coordenadas").push().setValue(latlong);
+-                Toast.makeText(this, "Coordenadas Agregadas", Toast.LENGTH_LONG).show();
+-                limpiar();
++                    Map<String, Object> latlong = new HashMap<>();
++                    latlong.put("latitud", u.getLatitud());
++                    latlong.put("longitud", u.getLongitud());
++                    databaseReference.child("coordenadas").push().setValue(latlong);
++                    Toast.makeText(this, "Coordenadas Agregadas", Toast.LENGTH_LONG).show();
++                    limpiar();
+ 
+                 }
+             break;
+Index: app/src/main/res/layout/activity_main_ingresar_geo.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    android:padding=\"25dp\"\r\n    tools:context=\".MainIngresarGeoActivity\">\r\n\r\n\r\n    <EditText\r\n        android:id=\"@+id/txtLatitud\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:inputType=\"numberDecimal|numberSigned\"\r\n        android:hint=\"Latitud\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/txtLongitud\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:inputType=\"numberDecimal|numberSigned\"\r\n        android:hint=\"Longitud\" />\r\n\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\">\r\n\r\n        <com.google.android.material.button.MaterialButton\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginRight=\"10dp\"\r\n            android:text=\"Guardar\"\r\n            android:id=\"@+id/btnGuardar\"/>\r\n\r\n    </LinearLayout>\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textSize=\"30dp\"\r\n        android:text=\"Lista de Spots\"\r\n        android:layout_gravity=\"center_horizontal\"/>\r\n\r\n    <ListView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:id=\"@+id/lv_datosCoordenadas\"/>\r\n</LinearLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main_ingresar_geo.xml	(revision 3f7575e826df4572e19c0fe0d085ea7340ca02a8)
++++ app/src/main/res/layout/activity_main_ingresar_geo.xml	(date 1606709002731)
+@@ -8,7 +8,6 @@
+     android:padding="25dp"
+     tools:context=".MainIngresarGeoActivity">
+ 
+-
+     <EditText
+         android:id="@+id/txtLatitud"
+         android:layout_width="match_parent"
+Index: app/src/main/java/com/victor/spot/MainRegistroActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.victor.spot;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.cardview.widget.CardView;\r\nimport androidx.core.os.BuildCompat;\r\n\r\nimport android.app.ProgressDialog;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.text.TextUtils;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ProgressBar;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.AuthResult;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\n\r\npublic class MainRegistroActivity extends AppCompatActivity {\r\n\r\n    private EditText email, password;\r\n    private Button register;\r\n    private ProgressDialog progressDialog;\r\n\r\n    FirebaseAuth firebaseAuth;\r\n\r\n\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main_registro);\r\n        progressDialog= new ProgressDialog(this );\r\n\r\n        firebaseAuth = FirebaseAuth.getInstance();\r\n\r\n        email=(EditText) findViewById(R.id.email);\r\n        password=(EditText) findViewById(R.id.password);\r\n        register=(Button) findViewById(R.id.register);\r\n\r\n        register.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                String userE= email.getText().toString();\r\n                String passE= password.getText().toString();\r\n                //validar si algun campo esta vacio\r\n                if(TextUtils.isEmpty(userE)){\r\n                    Toast.makeText(MainRegistroActivity.this, \"Inserte un correo\", Toast.LENGTH_SHORT).show();\r\n                    return;\r\n                }\r\n                if(TextUtils.isEmpty(passE)){\r\n                    Toast.makeText(MainRegistroActivity.this, \"Inserte una contraseña\", Toast.LENGTH_SHORT).show();\r\n                    return;\r\n                }\r\n                progressDialog.setMessage(\"En Proceso de registro\");\r\n                progressDialog.show();\r\n\r\n                firebaseAuth.createUserWithEmailAndPassword(userE,passE)\r\n                        .addOnCompleteListener(MainRegistroActivity.this, new OnCompleteListener<AuthResult>() {\r\n                            @Override\r\n                            public void onComplete(@NonNull Task<AuthResult> task) {\r\n                                Toast.makeText(MainRegistroActivity.this, \"Usuario registrado\", Toast.LENGTH_SHORT).show();\r\n\r\n                                if(!task.isSuccessful()){\r\n                                    Toast.makeText(MainRegistroActivity.this, \"No se registro\", Toast.LENGTH_SHORT).show();\r\n                        }\r\n                                Intent intent = new Intent (MainRegistroActivity.this, MainLoginActivity.class);\r\n                                startActivity(intent);\r\n            }\r\n                        });\r\n            }\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/victor/spot/MainRegistroActivity.java	(revision 3f7575e826df4572e19c0fe0d085ea7340ca02a8)
++++ app/src/main/java/com/victor/spot/MainRegistroActivity.java	(date 1606709002738)
+@@ -28,9 +28,6 @@
+ 
+     FirebaseAuth firebaseAuth;
+ 
+-
+-
+-
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+Index: app/src/main/java/com/victor/spot/MainLoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.victor.spot;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.cardview.widget.CardView;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.text.TextUtils;\r\nimport android.view.View;\r\nimport android.widget.EditText;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.AuthResult;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\n\r\npublic class MainLoginActivity extends AppCompatActivity {\r\n    private EditText email, password;\r\n    private CardView login;\r\n    private CardView register;\r\n\r\n\r\nFirebaseAuth firebaseAuth;\r\n\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main_login);\r\n\r\n        firebaseAuth= FirebaseAuth.getInstance();\r\n\r\n        email=(EditText) findViewById(R.id.email);\r\n        password=(EditText) findViewById(R.id.password);\r\n        login= (CardView) findViewById(R.id.login);\r\n        register=(CardView) findViewById(R.id.register);\r\n\r\n\r\n        //Acciones de botones\r\n        login.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                String userE= email.getText().toString();\r\n                String passE= password.getText().toString();\r\n                //validar si algun campo esta vacio\r\n                if(TextUtils.isEmpty(userE)){\r\n                    Toast.makeText(MainLoginActivity.this, \"Inserte un correo\", Toast.LENGTH_SHORT).show();\r\n                    return;\r\n                }\r\n                if(TextUtils.isEmpty(passE)){\r\n                    Toast.makeText(MainLoginActivity.this, \"Inserte una contraseña\", Toast.LENGTH_SHORT).show();\r\n                    return;\r\n                }\r\n                //usamos el firebaseAutch para loguearse\r\n                firebaseAuth.signInWithEmailAndPassword(userE, passE)\r\n                        .addOnCompleteListener(MainLoginActivity.this, new OnCompleteListener<AuthResult>() {\r\n                            @Override\r\n                            public void onComplete(@NonNull Task<AuthResult> task) {\r\n                                if (!task.isSuccessful()){\r\n                                    Toast.makeText(MainLoginActivity.this, \"Usuario o contraseña no son validas\", Toast.LENGTH_SHORT).show();\r\n                                }else {\r\n                                    Intent intent = new Intent (MainLoginActivity.this, MainHomeActivity.class);\r\n                                    startActivity(intent);\r\n                                }\r\n                            }\r\n                        });\r\n            }\r\n        });\r\n\r\n\r\n        register.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                firebaseAuth.signOut();\r\n                Intent intent = new Intent(MainLoginActivity.this,MainRegistroActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n\r\n\r\n\r\n\r\n\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/victor/spot/MainLoginActivity.java	(revision 3f7575e826df4572e19c0fe0d085ea7340ca02a8)
++++ app/src/main/java/com/victor/spot/MainLoginActivity.java	(date 1606709002742)
+@@ -24,8 +24,6 @@
+ 
+ FirebaseAuth firebaseAuth;
+ 
+-
+-
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+@@ -83,9 +81,6 @@
+ 
+ 
+ 
+-
+-
+-
+     }
+ 
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/victor/spot/MapsActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.victor.spot;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.fragment.app.FragmentActivity;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport com.google.android.gms.maps.CameraUpdate;\r\nimport com.google.android.gms.maps.CameraUpdateFactory;\r\nimport com.google.android.gms.maps.GoogleMap;\r\nimport com.google.android.gms.maps.OnMapReadyCallback;\r\nimport com.google.android.gms.maps.SupportMapFragment;\r\nimport com.google.android.gms.maps.model.BitmapDescriptorFactory;\r\nimport com.google.android.gms.maps.model.LatLng;\r\nimport com.google.android.gms.maps.model.Marker;\r\nimport com.google.android.gms.maps.model.MarkerOptions;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.util.ArrayList;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class MapsActivity extends FragmentActivity implements OnMapReadyCallback {\r\n\r\n    private GoogleMap mMap;\r\n\r\n\r\n\r\n    private DatabaseReference databaseReference;\r\n\r\n\r\n    private ArrayList<Marker> tmpRealTimeMarkers = new ArrayList<>();\r\n\r\n    private ArrayList<Marker> realTimeMarkers = new ArrayList<>();\r\n\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_maps);\r\n        // Obtain the SupportMapFragment and get notified when the map is ready to be used.\r\n        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()\r\n                .findFragmentById(R.id.map);\r\n        mapFragment.getMapAsync(this);\r\n\r\n        databaseReference = FirebaseDatabase.getInstance().getReference();\r\n\r\n    }\r\n\r\n    /**\r\n     * Manipulates the map once available.\r\n     * This callback is triggered when the map is ready to be used.\r\n     * This is where we can add markers or lines, add listeners or move the camera. In this case,\r\n     * we just add a marker near Sydney, Australia.\r\n     * If Google Play services is not installed on the device, the user will be prompted to install\r\n     * it inside the SupportMapFragment. This method will only be triggered once the user has\r\n     * installed Google Play services and returned to the app.\r\n     */\r\n    @Override\r\n    public void onMapReady(GoogleMap googleMap) {\r\n        mMap = googleMap;\r\n        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);\r\n\r\n        mMap.animateCamera(CameraUpdateFactory.zoomTo( 17.0f));\r\n\r\n        databaseReference.child(\"coordenadas\").addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\r\n                for (Marker marker:realTimeMarkers){\r\n                    marker.remove();\r\n                }\r\n\r\n                for (DataSnapshot snapshot: dataSnapshot.getChildren()){\r\n                    Marcadores mk = snapshot.getValue(Marcadores.class);\r\n\r\n                    Double latitud = mk.getLatitud();\r\n                    Double longitud = mk.getLongitud();\r\n\r\n                    MarkerOptions markerOptions = new MarkerOptions();\r\n                    markerOptions.position(new LatLng(latitud,longitud));\r\n                    tmpRealTimeMarkers.add(mMap.addMarker(markerOptions));\r\n                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));\r\n                    LatLng coordinate = new LatLng(latitud,longitud);\r\n                    CameraUpdate location = CameraUpdateFactory.newLatLngZoom(coordinate, 150);\r\n                    mMap.animateCamera(location);\r\n\r\n                }\r\n                realTimeMarkers.clear();\r\n                realTimeMarkers.addAll(tmpRealTimeMarkers);\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n            }\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/victor/spot/MapsActivity.java	(revision 3f7575e826df4572e19c0fe0d085ea7340ca02a8)
++++ app/src/main/java/com/victor/spot/MapsActivity.java	(date 1606709365450)
+@@ -28,17 +28,12 @@
+ 
+     private GoogleMap mMap;
+ 
+-
+-
+     private DatabaseReference databaseReference;
+ 
+-
+     private ArrayList<Marker> tmpRealTimeMarkers = new ArrayList<>();
+ 
+     private ArrayList<Marker> realTimeMarkers = new ArrayList<>();
+ 
+-
+-
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);

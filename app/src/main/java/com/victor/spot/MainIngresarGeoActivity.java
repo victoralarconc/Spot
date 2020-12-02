@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class MainIngresarGeoActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private List<Coordenada> listaCoordenadas = new ArrayList<>();
+    private List<Coordenada> listaCoordenadas = new ArrayList<>() ;
     ArrayAdapter<Coordenada> arrayAdapterCoordenadas;
 
     EditText latitud, longitud;
@@ -59,28 +59,18 @@ public class MainIngresarGeoActivity extends AppCompatActivity implements View.O
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaCoordenadas.clear();
                 for (DataSnapshot objSnaptshot : dataSnapshot.getChildren()) {
-
                     Coordenada u = objSnaptshot.getValue(Coordenada.class);
                     listaCoordenadas.add(u);
                     arrayAdapterCoordenadas = new ArrayAdapter<Coordenada>(MainIngresarGeoActivity.this, android.R.layout.simple_list_item_1, listaCoordenadas);
-
                     listaView_coordenadas.setAdapter(arrayAdapterCoordenadas);
-
-
             }
-
-
         }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
             }
-
         });
-
     }
 
 private void iniciarFirebase(){
@@ -95,7 +85,7 @@ private void limpiar (){
 }
 private void validacion(){
         Double latitudP = Double.parseDouble(latitud.getText().toString());
-    Double longitudP = Double.parseDouble(longitud.getText().toString());
+        Double longitudP = Double.parseDouble(longitud.getText().toString());
 
 
     if (latitudP.equals("")){
@@ -110,7 +100,7 @@ private void validacion(){
 @Override
     public void onClick(View v){
         Double latitudP = Double.parseDouble(latitud.getText().toString());
-    Double longitudP = Double.parseDouble(longitud.getText().toString());
+        Double longitudP = Double.parseDouble(longitud.getText().toString());
 
     switch(v.getId()){
         case R.id.btnGuardar: {
@@ -120,12 +110,12 @@ private void validacion(){
                 Coordenada u = new Coordenada();
                 u.setLatitud(latitudP);
                 u.setLongitud(longitudP);
-                Map<String, Object> latlong = new HashMap<>();
-                latlong.put("latitud", u.getLatitud());
-                latlong.put("longitud", u.getLongitud());
-                databaseReference.child("coordenadas").push().setValue(latlong);
-                Toast.makeText(this, "Coordenadas Agregadas", Toast.LENGTH_LONG).show();
-                limpiar();
+                    Map<String, Object> latlong = new HashMap<>();
+                    latlong.put("latitud", u.getLatitud());
+                    latlong.put("longitud", u.getLongitud());
+                    databaseReference.child("coordenadas").push().setValue(latlong);
+                    Toast.makeText(this, "Coordenadas Agregadas", Toast.LENGTH_LONG).show();
+                    limpiar();
 
                 }
             break;
