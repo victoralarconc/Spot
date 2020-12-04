@@ -36,6 +36,24 @@ public class MainHomeActivity extends AppCompatActivity {
             }
         });
 
+        CardView btn4 = (CardView) findViewById(R.id.cardLogin);
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent (v.getContext(), MainLoginActivity.class);
+                startActivityForResult(intent2, 0);
+            }
+        });
+
+        CardView btn5 = (CardView) findViewById(R.id.cardAcercaDe);
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent (v.getContext(), MainAcerca.class);
+                startActivityForResult(intent2, 0);
+            }
+        });
+
     }
 
 }
