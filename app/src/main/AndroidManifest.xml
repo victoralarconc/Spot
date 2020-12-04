@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_index_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainIngresarGeoActivity"></activity>
+        <activity android:name=".MainAcerca"></activity>
+        <activity android:name=".MainIngresarGeoActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
